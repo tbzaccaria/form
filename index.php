@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This a form to contact us"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link href="style.css" rel="stylesheet">
     
     <title>Form</title>
     
@@ -31,27 +31,26 @@
 
                     <label for="" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name">
-                    <br>
-                    <label for="" class="form-label">Lastname</label>
+                    
+                    <label for="" class="form-label mt-3">Lastname</label>
                     <input type="text" class="form-control" name="lastname">
-                    <br>
-                    <label for="" class="form-label">Gender</label>
+                   
+                    <label for="" class="form-label mt-3">Gender</label>
                     <input type="text" class="form-control" name="gender">
-                    <br>
-                    <label for="" class="form-label">Email address</label>
+                  
+                    <label for="" class="form-label mt-3">Email address</label>
                     <input type="text" class="form-control" name="emailaddress">
-                    <br>
-                    <label for="" class="form-label">Company</label>
+                    
+                    <label for="" class="form-label mt-3">Company</label>
                     <input type="text" class="form-control" name="company">
-                    <br>
-                    <label for="" class="form-label">Subject</label>
+                 
+                    <label for="" class="form-label mt-3">Subject</label>
                     <input type="text" class="form-control"name="subject">
-                    <br>
-                    <label for="" class="form-label">Message</label>
+                    
+                    <label for="" class="form-label mt-3">Message</label>
                     <input type="text" class="form-control" name="message">
-                    <br>
-                    <br>
-                    <input type="submit" class="btn btn-dark" name="submit" value="Submit">
+                 
+                    <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
                 </form>
             </div>
         
@@ -59,7 +58,7 @@
     <footer>
         <h2>More about us</h2>
         <section>
-            <ul class="center">
+            <ul class=col>
                 <li class="btn">Email Adress</li>
                 <li class="btn">Github</li>
                 <li class="btn">Linkedin</li>
