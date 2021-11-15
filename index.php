@@ -14,13 +14,16 @@
 <body class="h-100 w-100">
     <header class="h-10"> 
         <nav class="navbar navbar-expend-lg navbar-light bg-light">
+        <section>
             <ul>
                 <li class="btn">Home</li>
                 <li class="btn">Learn</li>
                 <li class="btn">Contact</li>
                 <li class="btn">About us</li>
             </ul>
+        </section>
         </nav>
+        
         
     </header>
     <main class="container h-80 w-80">
@@ -38,7 +41,7 @@
                     <input type="text" class="form-control" name="lastname">
                    
                     <label for="" class="form-label mt-3">Gender</label>
-                    <input type="radio" class="form-control" name="gender">
+                    <input type="text" class="form-control" name="gender">
                   
                     <label for="" class="form-label mt-3">Email address</label>
                     <input type="email" class="form-control" name="emailaddress">
