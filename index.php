@@ -24,33 +24,34 @@
         
     </header>
     <main class="container h-80 w-80">
-        <h1>Contact us</h1>
+        <h1 class="text-center">Contact us</h1>
         
             <div class="col-sm-4 offset-sm-4">
-                <form action="">
-                    <label for="">Name</label>
-                    <input type="text" name="name">
+                <form action="" class="form-inline">
+
+                    <label for="" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name">
                     <br>
-                    <label for="">Lastname</label>
-                    <input type="text" name="lastname">
+                    <label for="" class="form-label">Lastname</label>
+                    <input type="text" class="form-control" name="lastname">
                     <br>
-                    <label for="">Gender</label>
-                    <input type="text" name="gender">
+                    <label for="" class="form-label">Gender</label>
+                    <input type="text" class="form-control" name="gender">
                     <br>
-                    <label for="">Email address</label>
-                    <input type="text" name="emailaddress">
+                    <label for="" class="form-label">Email address</label>
+                    <input type="text" class="form-control" name="emailaddress">
                     <br>
-                    <label for="">Company</label>
-                    <input type="text" name="company">
+                    <label for="" class="form-label">Company</label>
+                    <input type="text" class="form-control" name="company">
                     <br>
-                    <label for="">Subject</label>
-                    <input type="text" name="subject">
+                    <label for="" class="form-label">Subject</label>
+                    <input type="text" class="form-control"name="subject">
                     <br>
-                    <label for="">Message</label>
-                    <input type="text" name="message">
+                    <label for="" class="form-label">Message</label>
+                    <input type="text" class="form-control" name="message">
                     <br>
                     <br>
-                    <input type="submit" name="submit" value="Submit">
+                    <input type="submit" class="btn btn-dark" name="submit" value="Submit">
                 </form>
             </div>
         
@@ -58,7 +59,7 @@
     <footer>
         <h2>More about us</h2>
         <section>
-            <ul>
+            <ul class="center">
                 <li class="btn">Email Adress</li>
                 <li class="btn">Github</li>
                 <li class="btn">Linkedin</li>
