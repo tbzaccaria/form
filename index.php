@@ -31,15 +31,17 @@
 
                     <label for="" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name">
+
+
                     
                     <label for="" class="form-label mt-3">Lastname</label>
                     <input type="text" class="form-control" name="lastname">
                    
                     <label for="" class="form-label mt-3">Gender</label>
-                    <input type="text" class="form-control" name="gender">
+                    <input type="radio" class="form-control" name="gender">
                   
                     <label for="" class="form-label mt-3">Email address</label>
-                    <input type="text" class="form-control" name="emailaddress">
+                    <input type="email" class="form-control" name="emailaddress">
                     
                     <label for="" class="form-label mt-3">Company</label>
                     <input type="text" class="form-control" name="company">
@@ -52,6 +54,19 @@
                  
                     <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
                 </form>
+                <?php
+                    if (isset($_GET['name'])){
+                        $name = $_GET['name'];
+
+                        if ( strlen ($name) == 0){
+                            echo '<br> <p style="color:red;">Ahem. You forgot to enter your name. </p> <br>';
+                            exit;
+                        }
+                        else{
+                            echo "<br>Hello " . $name. "<br>";
+                        }
+                    }
+                ?>
             </div>
         
     </main>
