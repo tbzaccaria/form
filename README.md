@@ -1,6 +1,6 @@
 # Challenge: Form
 ## This repo consists of a contact page
-This content is composed of these files:
+This folder is composed of these files:
 * index.php
 * script.js
 * style.css
