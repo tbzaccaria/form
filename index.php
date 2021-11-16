@@ -39,10 +39,28 @@
                     
                     <label for="" class="form-label mt-3">Lastname</label>
                     <input type="text" class="form-control" name="lastname">
-                   
+                    <!--
                     <label for="" class="form-label mt-3">Gender</label>
                     <input type="text" class="form-control" name="gender">
-                  
+                    -->
+                    
+                    <div class="form-check form-check-inline mt-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="male">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Male
+                    </label>
+                    </div>
+                    <div class="form-check form-check-inline mt-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="female">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Female
+                    </label>
+                    </div>
+                    
+
+
+                    
+                    <br>
                     <label for="" class="form-label mt-3">Email address</label>
                     <input type="email" class="form-control" name="emailaddress">
                     
@@ -58,18 +76,39 @@
                     <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
                 </form>
                 <?php
-                    if (isset($_GET['name'])){
-                        $name = $_GET['name'];
+                if (isset($_GET['name'])){
+                    $name = $_GET['name'];
 
-                        if ( strlen ($name) == 0){
-                            echo '<br> <p style="color:red;">Ahem. You forgot to enter your name. </p> <br>';
-                            exit;
-                        }
-                        else{
-                            echo "<br>Hello " . $name. "<br>";
-                        }
+                    if ( strlen ($name) == 0){
+                        echo '<br> <p style="color:red;">You forgot to enter your name. </p>';
                     }
+                    }
+                if (isset($_GET['lastname'])){
+                    $lastname = $_GET['lastname'];
+    
+                    if ( strlen ($lastname) == 0){
+                        echo '<p style="color:red;">You forgot to enter your lastname. </p>';
+                    }
+                    
+                }
+                if (isset($_GET['flexRadioDefault'])){
+                    $gender = ($_GET['flexRadioDefault']);
+                    echo ($gender);
+                    if ( ($gender != "male")){
+                        echo '<br> <p style="color:red;">You forgot to enter your gender. </p>';
+                        echo 'hello';
+                    }
+                    else {
+                        echo ($_GET['flexRadioDefault']);
+                    }
+                }
+
                 ?>
+                
+
+                
+                
+                
             </div>
         
     </main>
