@@ -30,21 +30,44 @@
         <h1 class="text-center">Contact us</h1>
         
             <div class="col-sm-4 offset-sm-4">
-                <form action="" class="form-inline">
+                <form action="" class="form-inline row g-3 needs-validation" novalidate">
 
-                    <label for="" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name">
+                    <!-- <label for="" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name"> -->
+                    <label for="validationCustom01" class="form-label">Firstname</label>
+                    <input type="text" class="form-control"  id="validationCustom01" name="name" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
 
+
+                    <label for="validationCustom02" class="form-label">Lastname</label>
+                    <input type="text" class="form-control"  id="validationCustom02" name="lastname" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
 
                     
-                    <label for="" class="form-label mt-3">Lastname</label>
-                    <input type="text" class="form-control" name="lastname">
+                    <label for="validationCustom04" class="form-label">Gender</label>
+                    <select class="form-select shadow-none" id="validationCustom04" name="gender" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                    </select>
+                    <div class="invalid-feedback">
+                    Please select a valid state.
+                    </div>
+                    
+
+                    <!-- <label for="" class="form-label mt-3">Lastname</label>
+                    <input type="text" class="form-control" name="lastname"> -->
                     <!--
                     <label for="" class="form-label mt-3">Gender</label>
                     <input type="text" class="form-control" name="gender">
                     -->
                     
-                    <div class="form-check form-check-inline mt-3">
+                    <!-- <div class="form-check form-check-inline mt-3">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="male">
                     <label class="form-check-label" for="flexRadioDefault1">
                         Male
@@ -55,36 +78,63 @@
                     <label class="form-check-label" for="flexRadioDefault2">
                         Female
                     </label>
-                    </div>
+                    </div> -->
                     
 
 
                     
                     <br>
-                    <label for="" class="form-label mt-3">Email address</label>
-                    <input type="email" class="form-control" name="emailaddress">
+                    <!-- <label for="" class="form-label mt-3">Email address</label>
+                    <input type="email" class="form-control" name="email"> -->
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="name@example.com">
                     
-                    <label for="" class="form-label mt-3">Company</label>
-                    <input type="text" class="form-control" name="company">
+                    
+                    <!-- <label for="" class="form-label mt-3">Company</label>
+                    <input type="text" class="form-control" name="company"> -->
+                    <label for="validationCustom05" class="form-label">Company</label>
+                    <input type="text" class="form-control"  id="validationCustom01" name="company" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
                  
-                    <label for="" class="form-label mt-3">Subject</label>
+                    <!-- <label for="" class="form-label mt-3">Subject</label>
                     <input type="text" class="form-control"name="subject">
-                    
+                     -->
+
+                     <label for="validationCustom06" class="form-label">Subject</label>
+                    <select class="form-select shadow-none" id="validationCustom04" name="subject" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    </select>
+                    <div class="invalid-feedback">
+
+                    Please select a valid state.
+                    </div>
                     <label for="" class="form-label mt-3">Message</label>
                     <input type="text" class="form-control" name="message">
-                 
+
+                    
+                    
+                    
+                    
+                        
                     <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
                 </form>
                 <?php
                 if (isset($_GET['name'])){
                     $name = $_GET['name'];
+                    echo ($_GET['name']);
 
                     if ( strlen ($name) == 0){
                         echo '<br> <p style="color:red;">You forgot to enter your name. </p>';
                     }
-                    }
+                }
                 if (isset($_GET['lastname'])){
                     $lastname = $_GET['lastname'];
+                    echo $lastname;
     
                     if ( strlen ($lastname) == 0){
                         echo '<p style="color:red;">You forgot to enter your lastname. </p>';
@@ -102,7 +152,21 @@
                         echo ($_GET['flexRadioDefault']);
                     }
                 }
-
+                if (isset($_GET['email'])){
+                    $email = ($_GET['email']);
+                    
+                        if ( strlen ($email) == 0){
+                            echo '<p style="color:red;">You forgot to enter your mail. </p>';
+                        }
+                }
+                if (isset($_GET['company'])){
+                    $company = ($_GET['company']);
+                        if ( strlen ($company) == 0){
+                            echo '<p style="color:red;">You forgot to enter your company. </p>';
+                        }
+                }
+                
+                
                 ?>
                 
 
@@ -123,6 +187,16 @@
         </section>
         <section>
             <h2>Map</h2>
+            <p>Choose your favorites</p>
+            <div classe="container">
+                <div class="checkbox">
+                    <input type="checkbox" name="" id="">
+                    <div class="box">
+                        <i class="fab fa-instagram"></i>
+                        <p data-text="Instagram">Instagram</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </footer>
 </body>
