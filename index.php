@@ -12,6 +12,7 @@
     
 </head>
 <body class="h-100 w-100">
+    <!-- Navbar -->
     <header class="h-10"> 
         <nav class="navbar navbar-expend-lg navbar-light bg-light">
         <section>
@@ -27,27 +28,27 @@
         
     </header>
     <main class="container h-80 w-80">
+        <!-- BODY -->
         <h1 class="text-center">Contact us</h1>
         
             <div class="col-sm-4 offset-sm-4">
+                <!-- FORM -->
                 <form action="" class="form-inline row g-3 needs-validation" novalidate>
-
-                    <!-- <label for="" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name"> -->
+                    <!-- Firstname -->
                     <label for="validationCustom01" class="form-label">Firstname</label>
                     <input type="text" class="form-control"  id="validationCustom01" name="name" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
 
-
+                    <!-- Lastname -->
                     <label for="validationCustom02" class="form-label">Lastname</label>
                     <input type="text" class="form-control"  id="validationCustom02" name="lastname" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
 
-                    
+                    <!-- Gender -->
                     <label for="validationCustom04" class="form-label">Gender</label>
                     <select class="form-select shadow-none" id="validationCustom04" name="gender" required>
                     <option selected disabled value="">Choose...</option>
@@ -58,51 +59,22 @@
                     <div class="invalid-feedback">
                     Please select a valid state.
                     </div>
-                    
 
-                    <!-- <label for="" class="form-label mt-3">Lastname</label>
-                    <input type="text" class="form-control" name="lastname"> -->
-                    <!--
-                    <label for="" class="form-label mt-3">Gender</label>
-                    <input type="text" class="form-control" name="gender">
-                    -->
-                    
-                    <!-- <div class="form-check form-check-inline mt-3">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="male">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Male
-                    </label>
-                    </div>
-                    <div class="form-check form-check-inline mt-3">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="female">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Female
-                    </label>
-                    </div> -->
-                    
-
-
-                    
                     <br>
-                    <!-- <label for="" class="form-label mt-3">Email address</label>
-                    <input type="email" class="form-control" name="email"> -->
+                    <!-- Email Address -->
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="name@example.com">
                     
                     
-                    <!-- <label for="" class="form-label mt-3">Company</label>
-                    <input type="text" class="form-control" name="company"> -->
+                    <!-- Company -->
                     <label for="validationCustom05" class="form-label">Company</label>
                     <input type="text" class="form-control"  id="validationCustom05" name="company" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
                  
-                    <!-- <label for="" class="form-label mt-3">Subject</label>
-                    <input type="text" class="form-control"name="subject">
-                     -->
-
-                     <label for="validationCustom06" class="form-label">Subject</label>
+                    <!-- Subject -->
+                    <label for="validationCustom06" class="form-label">Subject</label>
                     <select class="form-select shadow-none" id="validationCustom06" name="subject" required>
                     <option selected disabled value="">Choose...</option>
                     <option value="a">A</option>
@@ -113,18 +85,23 @@
 
                     Please select a valid state.
                     </div>
+
+                    <!-- Message -->
                     <label for="" class="form-label mt-3">Message</label>
                     <input type="text" class="form-control" name="message">
 
-                    
-                    
-                    
-                    
-                        
+                    <!-- Submit -->
                     <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
                 </form>
                 <?php
+                
+                
+                // Counter
                 $number=0;
+
+                // -- RegEX CONDITION: --
+
+                // Firstname condition
                 if (isset($_GET['name'])){
                     $name = $_GET['name'];
                     echo ($_GET['name']);
@@ -132,13 +109,14 @@
                     if ( strlen ($name) == 0){
                         echo '<br> <p style="color:red;">You forgot to enter your name. </p>';
                     }
-                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['name']))==1){
+                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['name'])) == 1){
                         echo '<p style="color:red;">Please do not enter special character in the firstname section</p>';
                     }
                     else{
                         $number = $number + 1;
                     }
                 }
+                // Lastname condition
                 if (isset($_GET['lastname'])){
                     $lastname = $_GET['lastname'];
                     echo $lastname;
@@ -146,13 +124,15 @@
                     if ( strlen ($lastname) == 0){
                         echo '<p style="color:red;">You forgot to enter your lastname. </p>';
                     }
-                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['lastname']))==1){
+                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['lastname'])) == 1){
                         echo '<p style="color:red;">Please do not enter special character in the lastname section</p>';
                     }
                     else{
                         $number = $number + 1;
                     }
                 }
+
+                // Gender condition
                 if (isset($_GET['gender'])){
                     $gender = ($_GET['gender']);
                     echo ($gender);
@@ -165,6 +145,8 @@
                     }
                     
                 }
+
+                // Email Address condition
                 if (isset($_GET['email'])){
                     $email = ($_GET['email']);
                     
@@ -172,11 +154,11 @@
                             echo '<p style="color:red;">You forgot to enter your mail. </p>';
                             $number = 0;
                         }
-                        elseif((preg_match("/@/i", $_GET['email'])==0)){
+                        elseif((preg_match("/@/i", $_GET['email']) == 0)){
                             echo '<p style="color:red;">Please enter correct email section</p>';
                             $number = 0;
                         }
-                        elseif((preg_match("/./i", $_GET['email'])==0)){
+                        elseif((preg_match("/./i", $_GET['email']) == 0)){
                             echo '<p style="color:red;">Please enter correct email section</p>';
                             $number = 0;
                         }
@@ -184,16 +166,21 @@
                             $number = $number + 1;
                         }
                 }
+
+                // Company condition
                 if (isset($_GET['company'])){
                     $company = ($_GET['company']);
                         if ( strlen ($company) == 0){
                             echo '<p style="color:red;">You forgot to enter your company. </p>';
+                            
                             $number = 0;
                         }
                         else{
                             $number = $number + 1;
                         }
                 }
+
+                // Subject condition
                 if (isset($_GET['subject'])){
                     $subject = ($_GET['subject']);
                     if (strlen ($subject) == 0){
@@ -204,6 +191,8 @@
                         $number = $number + 1;
                     }
                 }
+
+                // Message condition
                 if (isset($_GET['message'])){
                     $message = ($_GET['message']);
                     if ( strlen ($message) == 0){
@@ -215,6 +204,7 @@
                     }
                 }
                 
+                // Verify if the mail can be send
                 if ($number==7){
                     echo 'A mail can be send';
                 }
