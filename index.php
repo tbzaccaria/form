@@ -221,8 +221,10 @@
             </div>
         
     </main>
+    <!-- Footer -->
     <footer>
         <h2>More about us</h2>
+        <!-- Check Box -->
         <section>
             <ul class=col>
                 <li class="btn">Email Adress</li>
