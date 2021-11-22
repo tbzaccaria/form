@@ -95,7 +95,12 @@
                 </form>
                 <?php
                 
-                
+                function clean($value){
+                    $value = trim($value);
+                    $value = stripslashes($value);
+                    $value = htmlspecialchars($value);
+                    return $value;
+                }
                 // Counter
                 $number=0;
 
@@ -103,7 +108,7 @@
 
                 // Firstname condition
                 if (isset($_GET['name'])){
-                    $name = $_GET['name'];
+                    $name = clean($_GET['name']);
                     echo ($_GET['name']);
 
                     if ( strlen ($name) == 0){
@@ -118,7 +123,7 @@
                 }
                 // Lastname condition
                 if (isset($_GET['lastname'])){
-                    $lastname = $_GET['lastname'];
+                    $lastname = clean($_GET['lastname']);
                     echo $lastname;
     
                     if ( strlen ($lastname) == 0){
@@ -134,7 +139,7 @@
 
                 // Gender condition
                 if (isset($_GET['gender'])){
-                    $gender = ($_GET['gender']);
+                    $gender = clean($_GET['gender']);
                     echo ($gender);
                     if (preg_match("/male|female|other/i", $_GET['gender']) == 1){
                         $number = $number + 1;
@@ -147,8 +152,8 @@
                 }
 
                 // Email Address condition
-                if (isset($_GET['email'])){
-                    $email = ($_GET['email']);
+                if (isset ($_GET['email'])){
+                    $email = clean($_GET['email']);
                     
                         if ( strlen ($email) == 0){
                             echo '<p style="color:red;">You forgot to enter your mail. </p>';
@@ -168,8 +173,8 @@
                 }
 
                 // Company condition
-                if (isset($_GET['company'])){
-                    $company = ($_GET['company']);
+                if (isset ($_GET['company'])){
+                    $company = clean($_GET['company']);
                         if ( strlen ($company) == 0){
                             echo '<p style="color:red;">You forgot to enter your company. </p>';
                             
@@ -181,8 +186,8 @@
                 }
 
                 // Subject condition
-                if (isset($_GET['subject'])){
-                    $subject = ($_GET['subject']);
+                if (isset ($_GET['subject'])){
+                    $subject = clean($_GET['subject']);
                     if (strlen ($subject) == 0){
                         echo '<p style="color:red;">You forgot to enter your subject. </p>';
                         $number = 0;
@@ -193,8 +198,8 @@
                 }
 
                 // Message condition
-                if (isset($_GET['message'])){
-                    $message = ($_GET['message']);
+                if (isset ($_GET['message'])){
+                    $message = clean($_GET['message']);
                     if ( strlen ($message) == 0){
                         echo '<p style="color:red;">You forgot to enter your message. </p>';
                         $number = 0;
