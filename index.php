@@ -30,7 +30,7 @@
         <h1 class="text-center">Contact us</h1>
         
             <div class="col-sm-4 offset-sm-4">
-                <form action="" class="form-inline row g-3 needs-validation" novalidate">
+                <form action="" class="form-inline row g-3 needs-validation" novalidate>
 
                     <!-- <label for="" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name"> -->
@@ -51,9 +51,9 @@
                     <label for="validationCustom04" class="form-label">Gender</label>
                     <select class="form-select shadow-none" id="validationCustom04" name="gender" required>
                     <option selected disabled value="">Choose...</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
                     </select>
                     <div class="invalid-feedback">
                     Please select a valid state.
@@ -93,7 +93,7 @@
                     <!-- <label for="" class="form-label mt-3">Company</label>
                     <input type="text" class="form-control" name="company"> -->
                     <label for="validationCustom05" class="form-label">Company</label>
-                    <input type="text" class="form-control"  id="validationCustom01" name="company" required>
+                    <input type="text" class="form-control"  id="validationCustom05" name="company" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
@@ -103,11 +103,11 @@
                      -->
 
                      <label for="validationCustom06" class="form-label">Subject</label>
-                    <select class="form-select shadow-none" id="validationCustom04" name="subject" required>
+                    <select class="form-select shadow-none" id="validationCustom06" name="subject" required>
                     <option selected disabled value="">Choose...</option>
-                    <option>A</option>
-                    <option>B</option>
-                    <option>C</option>
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
                     </select>
                     <div class="invalid-feedback">
 
@@ -124,12 +124,19 @@
                     <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
                 </form>
                 <?php
+                $number=0;
                 if (isset($_GET['name'])){
                     $name = $_GET['name'];
                     echo ($_GET['name']);
 
                     if ( strlen ($name) == 0){
                         echo '<br> <p style="color:red;">You forgot to enter your name. </p>';
+                    }
+                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['name']))==1){
+                        echo '<p style="color:red;">Please do not enter special character in the firstname section</p>';
+                    }
+                    else{
+                        $number = $number + 1;
                     }
                 }
                 if (isset($_GET['lastname'])){
@@ -139,33 +146,81 @@
                     if ( strlen ($lastname) == 0){
                         echo '<p style="color:red;">You forgot to enter your lastname. </p>';
                     }
-                    
+                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['lastname']))==1){
+                        echo '<p style="color:red;">Please do not enter special character in the lastname section</p>';
+                    }
+                    else{
+                        $number = $number + 1;
+                    }
                 }
-                if (isset($_GET['flexRadioDefault'])){
-                    $gender = ($_GET['flexRadioDefault']);
+                if (isset($_GET['gender'])){
+                    $gender = ($_GET['gender']);
                     echo ($gender);
-                    if ( ($gender != "male")){
-                        echo '<br> <p style="color:red;">You forgot to enter your gender. </p>';
-                        echo 'hello';
+                    if (preg_match("/male|female|other/i", $_GET['gender']) == 1){
+                        $number = $number + 1;
                     }
-                    else {
-                        echo ($_GET['flexRadioDefault']);
+                    else{
+                        echo '<p style="color:red;">You forgot to enter your gender. </p>';
+                        $number = 0;
                     }
+                    
                 }
                 if (isset($_GET['email'])){
                     $email = ($_GET['email']);
                     
                         if ( strlen ($email) == 0){
                             echo '<p style="color:red;">You forgot to enter your mail. </p>';
+                            $number = 0;
+                        }
+                        elseif((preg_match("/@/i", $_GET['email'])==0)){
+                            echo '<p style="color:red;">Please enter correct email section</p>';
+                            $number = 0;
+                        }
+                        elseif((preg_match("/./i", $_GET['email'])==0)){
+                            echo '<p style="color:red;">Please enter correct email section</p>';
+                            $number = 0;
+                        }
+                        else{
+                            $number = $number + 1;
                         }
                 }
                 if (isset($_GET['company'])){
                     $company = ($_GET['company']);
                         if ( strlen ($company) == 0){
                             echo '<p style="color:red;">You forgot to enter your company. </p>';
+                            $number = 0;
+                        }
+                        else{
+                            $number = $number + 1;
                         }
                 }
+                if (isset($_GET['subject'])){
+                    $subject = ($_GET['subject']);
+                    if (strlen ($subject) == 0){
+                        echo '<p style="color:red;">You forgot to enter your subject. </p>';
+                        $number = 0;
+                    }
+                    else{
+                        $number = $number + 1;
+                    }
+                }
+                if (isset($_GET['message'])){
+                    $message = ($_GET['message']);
+                    if ( strlen ($message) == 0){
+                        echo '<p style="color:red;">You forgot to enter your message. </p>';
+                        $number = 0;
+                    }
+                    else{
+                        $number = $number + 1;
+                    }
+                }
                 
+                if ($number==7){
+                    echo 'A mail can be send';
+                }
+                else{
+                    echo 'You missed at least an information';
+                }
                 
                 ?>
                 
