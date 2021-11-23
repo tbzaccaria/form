@@ -33,7 +33,7 @@
         
             <div class="col-sm-4 offset-sm-4">
                 <!-- FORM -->
-                <form action="" class="form-inline row g-3 needs-validation" novalidate>
+                <form action="" method="post" class="form-inline row g-3 needs-validation" novalidate>
                     <!-- Firstname -->
                     <label for="validationCustom01" class="form-label">Firstname</label>
                     <input type="text" class="form-control"  id="validationCustom01" name="name" required>
@@ -104,17 +104,20 @@
                 // Counter
                 $number=0;
 
-                // -- RegEX CONDITION: --
+                // -- VALIDATION: --
 
                 // Firstname condition
-                if (isset($_GET['name'])){
-                    $name = clean($_GET['name']);
-                    echo ($_GET['name']);
+                if (filter_has_var(INPUT_POST, 'name')){
+                    $name = filter_input(INPUT_POST,'name', FILTER_SANITIZE_SPECIAL_CHARS);
+                    
+                    
+                    
+                    echo ($name);
 
                     if ( strlen ($name) == 0){
                         echo '<br> <p style="color:red;">You forgot to enter your name. </p>';
                     }
-                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['name'])) == 1){
+                    elseif((preg_match("/[^a-zA-Z]/i", $name)) == 1){
                         echo '<p style="color:red;">Please do not enter special character in the firstname section</p>';
                     }
                     else{
@@ -122,14 +125,14 @@
                     }
                 }
                 // Lastname condition
-                if (isset($_GET['lastname'])){
-                    $lastname = clean($_GET['lastname']);
+                if (filter_has_var(INPUT_POST, 'lastname')){
+                    $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);
                     echo $lastname;
     
                     if ( strlen ($lastname) == 0){
                         echo '<p style="color:red;">You forgot to enter your lastname. </p>';
                     }
-                    elseif((preg_match("/[^a-zA-Z]/i", $_GET['lastname'])) == 1){
+                    elseif((preg_match("/[^a-zA-Z]/i", $lastname)) == 1){
                         echo '<p style="color:red;">Please do not enter special character in the lastname section</p>';
                     }
                     else{
@@ -138,10 +141,10 @@
                 }
 
                 // Gender condition
-                if (isset($_GET['gender'])){
-                    $gender = clean($_GET['gender']);
-                    echo ($gender);
-                    if (preg_match("/male|female|other/i", $_GET['gender']) == 1){
+                if (filter_has_var(INPUT_POST,'gender')){
+                    $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_SPECIAL_CHARS);
+                    
+                    if (preg_match("/male|female|other/i", $gender) == 1){
                         $number = $number + 1;
                     }
                     else{
@@ -152,29 +155,29 @@
                 }
 
                 // Email Address condition
-                if (isset ($_GET['email'])){
-                    $email = clean($_GET['email']);
+                if (filter_has_var(INPUT_POST, 'email')){
+                    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
+                    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+                    
                     
                         if ( strlen ($email) == 0){
                             echo '<p style="color:red;">You forgot to enter your mail. </p>';
                             $number = 0;
                         }
-                        elseif((preg_match("/@/i", $_GET['email']) == 0)){
-                            echo '<p style="color:red;">Please enter correct email section</p>';
-                            $number = 0;
-                        }
-                        elseif((preg_match("/./i", $_GET['email']) == 0)){
-                            echo '<p style="color:red;">Please enter correct email section</p>';
-                            $number = 0;
+                        elseif (filter_var($email, FILTER_VALIDATE_EMAIL)){
+                            
+                            $number = $number + 1;
                         }
                         else{
-                            $number = $number + 1;
+                            $number = 0;
+                            echo '<p style="color:red;">This email is not valid. </p>';
+                            
                         }
                 }
 
                 // Company condition
-                if (isset ($_GET['company'])){
-                    $company = clean($_GET['company']);
+                if (filter_has_var(INPUT_POST, 'company')){
+                    $company = filter_input(INPUT_POST, 'company', FILTER_SANITIZE_SPECIAL_CHARS);;
                         if ( strlen ($company) == 0){
                             echo '<p style="color:red;">You forgot to enter your company. </p>';
                             
@@ -186,8 +189,8 @@
                 }
 
                 // Subject condition
-                if (isset ($_GET['subject'])){
-                    $subject = clean($_GET['subject']);
+                if (filter_has_var(INPUT_POST, 'subject')){
+                    $subject = filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_SPECIAL_CHARS);
                     if (strlen ($subject) == 0){
                         echo '<p style="color:red;">You forgot to enter your subject. </p>';
                         $number = 0;
@@ -198,8 +201,8 @@
                 }
 
                 // Message condition
-                if (isset ($_GET['message'])){
-                    $message = clean($_GET['message']);
+                if (filter_has_var(INPUT_POST, 'message')){
+                    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS);
                     if ( strlen ($message) == 0){
                         echo '<p style="color:red;">You forgot to enter your message. </p>';
                         $number = 0;
