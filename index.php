@@ -13,14 +13,14 @@
 </head>
 <body class="h-100 w-100">
     <!-- Navbar -->
-    <header class="h-10"> 
-        <nav class="navbar navbar-expend-lg navbar-light bg-light">
+    <header> 
+        <nav class="navbar navbar-expend-lg navbar-white bg-primary mb-5">
         <section>
             <ul>
-                <li class="btn">Home</li>
-                <li class="btn">Learn</li>
-                <li class="btn">Contact</li>
-                <li class="btn">About us</li>
+                <li class="btn text-white">Home</li>
+                <li class="btn text-white">Learn</li>
+                <li class="btn text-white">Contact</li>
+                <li class="btn text-white">About us</li>
             </ul>
         </section>
         </nav>
@@ -28,7 +28,98 @@
         
     </header>
     <main class="container h-80 w-80">
+        <?php
+        $msg = "";
+        $msgClass = "";
+
+        if (filter_has_var(INPUT_POST, "submit")){
+
+            
+
+            // Get form data
+            $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+            $lastname = htmlspecialchars($_POST['lastname']);
+            $email = htmlspecialchars($_POST['email']);
+            if (filter_has_var(INPUT_POST, "gender")){
+                $gender = htmlspecialchars($_POST['gender']);
+            } else {
+                $gender = "";
+            }
+            if (filter_has_var(INPUT_POST, "subject")){
+                $subject = htmlspecialchars($_POST['subject']);
+            } else {
+                $subject = "";
+            }
+            $company = htmlspecialchars($_POST['company']);
+            
+            $message = htmlspecialchars($_POST['message']);
+            
+            
+            $valid = true;
+
+            // Check if input empty
+            if (!empty($firstname) && !empty($lastname) && !empty($email) && !empty($gender) && !empty($subject) && !empty($company)){
+                
+                
+                // VALIDATION - ERROR
+                if ((preg_match("/[^a-zA-Z]/i", $firstname)) === 1 || strlen($firstname) === 0 || strlen($firstname) > 32){
+                    
+                    $msg = $msg . 'Please do not enter special char in the firstname section <br>';
+                    $msgClass = 'alert-danger';
+                    $valid = false;
+                }
+
+                if (((preg_match("/[^a-zA-Z]/i", $lastname)) === 1) || strlen($lastname === 0) || strlen($lastname) > 32){
+                    $msg = $msg . 'Please do not enter special char in the lastname section <br>';
+                    $msgClass = 'alert-danger';
+                    $valid = false;
+                }
+
+                if (preg_match("/male|female|other/i", $gender) === 0){
+                    $msg = $msg . 'Please choose one of the selection in the gender section <br>';
+                    $msgClass = 'alert-danger';
+                    $valid = false;
+
+                }
+
+                if (filter_var($email, FILTER_VALIDATE_EMAIL) === false){
+                    $msg = $msg . 'Please use a valid email <br>';
+                    $msgClass = 'alert-danger';
+                    $valid = false;
+                }
+
+                if ((preg_match("/[^a-zA-Z]/i", $company)) === 1 || strlen($company) === 0 || strlen($company) > 32){
+                    $msg = $msg . 'Please do not enter special char in the company section <br>';
+                    $msgClass = 'alert-danger';
+                    $valid = false;
+                }
+
+                if (preg_match("/A|B|C/i", $subject) === 0){
+                    $msg = $msg . 'Please choose one of the selection in the subject section <br>';
+                    $msgClass = 'alert-danger';
+                    $valid = false;
+                }
+
+                if ($valid === true){
+                    $msg = "Success you completed the form";
+                    $msgClass = 'alert-success';
+                }
+
+                
+                
+            } else{
+                // fail
+                $msg = 'Please fill in all fields';
+                $msgClass = 'alert-danger';
+            }
+        }
+
+
+        ?>
         <!-- BODY -->
+        <?php if($msg != ""): ?>
+            <div class="alert <?php echo $msgClass; ?>"><?php echo $msg; ?></div>
+        <?php endif; ?>
         <h1 class="text-center">Contact us</h1>
         
             <div class="col-sm-4 offset-sm-4">
@@ -36,7 +127,7 @@
                 <form action="" method="post" class="form-inline row g-3 needs-validation" novalidate>
                     <!-- Firstname -->
                     <label for="validationCustom01" class="form-label">Firstname</label>
-                    <input type="text" class="form-control"  id="validationCustom01" name="name" required>
+                    <input type="text" class="form-control"  id="validationCustom01" name="firstname" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
@@ -87,172 +178,16 @@
                     </div>
 
                     <!-- Message -->
-                    <label for="" class="form-label mt-3">Message</label>
-                    <input type="text" class="form-control" name="message">
+                    <label for="" class="form-label">Message</label>
+                    <textarea type="text" class="form-control mb-3" name="message" row="3"></textarea>
 
                     <!-- Submit -->
-                    <input type="submit" class="btn btn-dark mt-3" name="submit" value="Submit">
+                    <input type="submit" class="btn btn-primary mb-5" name="submit" value="Submit">
                 </form>
-                <?php
-                
-                function clean($value){
-                    $value = trim($value);
-                    $value = stripslashes($value);
-                    $value = htmlspecialchars($value);
-                    return $value;
-                }
-                // Counter
-                $number=0;
-
-                // -- VALIDATION: --
-
-                // Firstname condition
-                if (filter_has_var(INPUT_POST, 'name')){
-                    $name = filter_input(INPUT_POST,'name', FILTER_SANITIZE_SPECIAL_CHARS);
-                    
-                    
-                    
-                    echo ($name);
-
-                    if ( strlen ($name) == 0){
-                        echo '<br> <p style="color:red;">You forgot to enter your name. </p>';
-                    }
-                    elseif((preg_match("/[^a-zA-Z]/i", $name)) == 1){
-                        echo '<p style="color:red;">Please do not enter special character in the firstname section</p>';
-                    }
-                    else{
-                        $number = $number + 1;
-                    }
-                }
-                // Lastname condition
-                if (filter_has_var(INPUT_POST, 'lastname')){
-                    $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS);
-                    echo $lastname;
-    
-                    if ( strlen ($lastname) == 0){
-                        echo '<p style="color:red;">You forgot to enter your lastname. </p>';
-                    }
-                    elseif((preg_match("/[^a-zA-Z]/i", $lastname)) == 1){
-                        echo '<p style="color:red;">Please do not enter special character in the lastname section</p>';
-                    }
-                    else{
-                        $number = $number + 1;
-                    }
-                }
-
-                // Gender condition
-                if (filter_has_var(INPUT_POST,'gender')){
-                    $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_SPECIAL_CHARS);
-                    
-                    if (preg_match("/male|female|other/i", $gender) == 1){
-                        $number = $number + 1;
-                    }
-                    else{
-                        echo '<p style="color:red;">You forgot to enter your gender. </p>';
-                        $number = 0;
-                    }
-                    
-                }
-
-                // Email Address condition
-                if (filter_has_var(INPUT_POST, 'email')){
-                    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
-                    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-                    
-                    
-                        if ( strlen ($email) == 0){
-                            echo '<p style="color:red;">You forgot to enter your mail. </p>';
-                            $number = 0;
-                        }
-                        elseif (filter_var($email, FILTER_VALIDATE_EMAIL)){
-                            
-                            $number = $number + 1;
-                        }
-                        else{
-                            $number = 0;
-                            echo '<p style="color:red;">This email is not valid. </p>';
-                            
-                        }
-                }
-
-                // Company condition
-                if (filter_has_var(INPUT_POST, 'company')){
-                    $company = filter_input(INPUT_POST, 'company', FILTER_SANITIZE_SPECIAL_CHARS);;
-                        if ( strlen ($company) == 0){
-                            echo '<p style="color:red;">You forgot to enter your company. </p>';
-                            
-                            $number = 0;
-                        }
-                        else{
-                            $number = $number + 1;
-                        }
-                }
-
-                // Subject condition
-                if (filter_has_var(INPUT_POST, 'subject')){
-                    $subject = filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_SPECIAL_CHARS);
-                    if (strlen ($subject) == 0){
-                        echo '<p style="color:red;">You forgot to enter your subject. </p>';
-                        $number = 0;
-                    }
-                    else{
-                        $number = $number + 1;
-                    }
-                }
-
-                // Message condition
-                if (filter_has_var(INPUT_POST, 'message')){
-                    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_SPECIAL_CHARS);
-                    if ( strlen ($message) == 0){
-                        echo '<p style="color:red;">You forgot to enter your message. </p>';
-                        $number = 0;
-                    }
-                    else{
-                        $number = $number + 1;
-                    }
-                }
-                
-                // Verify if the mail can be send
-                if ($number==7){
-                    echo 'A mail can be send';
-                }
-                else{
-                    echo 'You missed at least an information';
-                }
-                
-                ?>
-                
-
-                
-                
                 
             </div>
         
     </main>
-    <!-- Footer -->
-    <footer>
-        <h2>More about us</h2>
-        <!-- Check Box -->
-        <section>
-            <ul class=col>
-                <li class="btn">Email Adress</li>
-                <li class="btn">Github</li>
-                <li class="btn">Linkedin</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Map</h2>
-            <p>Choose your favorites</p>
-            <div classe="container">
-                <div class="checkbox">
-                    <input type="checkbox" name="" id="">
-                    <div class="box">
-                        <i class="fab fa-instagram"></i>
-                        <p data-text="Instagram">Instagram</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </footer>
+    
 </body>
 </html>

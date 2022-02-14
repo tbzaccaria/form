@@ -6,3 +6,7 @@ form .form-select:focus{
     border-color: #ced4da;
     box-shadow: none;
 }
+.btn-group{
+    border:none;
+    border-radius:1em;
+}
